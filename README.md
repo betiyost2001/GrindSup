@@ -17,7 +17,7 @@ Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desd
 
 ## 🟦 Sprint 1 – Desarrollo Inicial y Base de Datos (2 semanas)
 
-**Objetivo:** Establecer la estructura del backend y comenzar con el frontend.
+**Objetivo:** Establecer la estructura del backend y frontend.
 
 * Implementar el **backend** con conexión a la base de datos.
 * Crear la **base de datos en MySQL**.
