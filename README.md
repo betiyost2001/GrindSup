@@ -21,8 +21,8 @@ Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desd
 
 * Implementar el **Backend** con conexión a la base de datos.
 * Crear la **Base de datos en MySQL**.
-* Realizar **Peticiones CRUD** desde el backend.
-* Comenzar el **Frontend** con vistas iniciales e integración básica.
+* Realizar **Peticiones CRUD** desde el backend (Java).
+* Comenzar el **Frontend** con vistas iniciales e integración básica (React).
 * Continuar con la **Documentación**: estudio inicial y plan de proyecto.
 * Capacitarse en **Scrum, MySQL, Vercel, Testing, JWT, API de Whatsapp**, en este sprint y en el siguiente.
 
