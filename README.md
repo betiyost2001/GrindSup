@@ -12,6 +12,7 @@ Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desd
 * Revisión y ajustes de los documentos generados.
 * Definir el producto a realizar (plataforma GrindSup).
 * Exposición inicial del avance y entrega de documentación.
+* Capacitarse en **Scrum, MySQL, Vercel, Testing, JWT, API de Whatsapp**, en este sprint.
 
 ---
 
@@ -24,7 +25,6 @@ Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desd
 * Realizar **Peticiones CRUD** desde el backend (Java).
 * Comenzar el **Frontend** con vistas iniciales e integración básica (React).
 * Continuar con la **Documentación**: estudio inicial y plan de proyecto.
-* Capacitarse en **Scrum, MySQL, Vercel, Testing, JWT, API de Whatsapp**, en este sprint y en el siguiente.
 
 **Roles:**
 
