@@ -35,4 +35,6 @@ Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desd
 
 ---
 
-Si querés, puedo seguir armando **Sprint 2 y Sprint 3** con este mismo estilo para que tengas toda la hoja de ruta lista y uniforme. ¿Querés que haga eso?
+## 🟦 Sprint 2 –  (2 semanas)
+
+**Objetivo:**
