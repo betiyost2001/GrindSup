@@ -55,3 +55,11 @@ backend/
 ├── mvnw                            # Script Linux/Mac para ejecutar Maven Wrapper
 ├── mvnw.cmd                        # Script Windows para ejecutar Maven Wrapper
 ├── pom.xml                         # Configuración y dependencias del proyecto
+
+
+
+## Para instalar
+ -Compilar y empaquetar:
+      ./mvnw clean package
+ -Ejecutar directamente con Maven:
+      ./mvnw spring-boot:run
