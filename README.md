@@ -2,7 +2,7 @@
 
 Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desde la fase de organización (Sprint 0) hasta el despliegue del mismo.
 
-## 🟦 Sprint 0 – Preparación y Organización (2 semana)
+## 🟦 Sprint 0 – Preparación y Organización (3 semana)
 
 **Objetivo:** Alinear al equipo y sentar las bases conceptuales del proyecto.
 
