@@ -9,52 +9,81 @@ backend/
 ├── .mvn/                           # Configuración interna de Maven Wrapper
 ├── .vscode/                        # Configuración de VSCode
 ├── target/                         # Archivos compilados (build)
-│   ├── backend-0.0.1-SNAPSHOT/     # Resultado empaquetado de la app
-│   ├── backend-0.0.1-SNAPSHOT.jar  # JAR ejecutable generado
+│   ├── backend-0.0.1-SNAPSHOT/     
+│   ├── backend-0.0.1-SNAPSHOT.jar  
 │   ├── backend-0.0.1-SNAPSHOT.jar.original
-│   ├── classes/                    # Clases compiladas de main/
+│   ├── classes/                    
 │   │   └── application.properties
-│   ├── generated-sources/          # Código generado automáticamente
+│   ├── generated-sources/          
 │   │   └── annotations/
-│   ├── generated-test-sources/     # Código generado para tests
+│   ├── generated-test-sources/     
 │   │   └── test-annotations/
-│   ├── maven-archiver/             # Metadatos del build
+│   ├── maven-archiver/             
 │   │   └── pom.properties
-│   ├── maven-status/               # Estado de compilación (plugins)
+│   ├── maven-status/               
 │   │   └── maven-compiler-plugin/
 │   │       ├── compile/
 │   │       └── testCompile/
-│   ├── surefire-reports/           # Reportes de pruebas unitarias
+│   ├── surefire-reports/           
 │   │   ├── com.grindsup.backend.BackendApplicationTest.txt
 │   │   └── TEST-com.grindsup.backend.BackendApplicationTests.xml
-│   └── test-classes/               # Clases compiladas de test/
+│   └── test-classes/               
 │       └── com/grindsup/backend/
 │           └── BackendApplicationTests.class
 │
-├── src/                            # Código fuente principal
+├── src/                            
 │   ├── main/
 │   │   ├── java/com/grindsup/backend/
-│   │   │   ├── GrindSupBackendApplication.java   # Clase principal (Spring Boot app)
+│   │   │   ├── GrindSupBackendApplication.java   
 │   │   │   ├── controller/         # Controladores REST
-│   │   │   │   └── EntrenadorController.java
+│   │   │   │   ├── AlumnoController.java
+│   │   │   │   ├── AgendaController.java
+│   │   │   │   ├── EntrenadorController.java
+│   │   │   │   ├── EjercicioController.java
+│   │   │   │   ├── PlanEntrenamientoController.java
+│   │   │   │   ├── RutinaController.java
+│   │   │   │   ├── RutinaEjercicioController.java
+│   │   │   │   ├── EstadoController.java
+│   │   │   │   ├── SesionEntrenadorController.java
+│   │   │   │   └── TurnoController.java
 │   │   │   ├── model/              # Entidades JPA (tablas)
-│   │   │   │   └── Entrenador.java
+│   │   │   │   ├── Alumno.java
+│   │   │   │   ├── Agenda.java
+│   │   │   │   ├── Entrenador.java
+│   │   │   │   ├── Ejercicio.java
+│   │   │   │   ├── PlanEntrenamiento.java
+│   │   │   │   ├── Rutina.java
+│   │   │   │   ├── RutinaEjercicio.java
+│   │   │   │   ├── RutinaEjercicioId.java
+│   │   │   │   ├── Estado.java
+│   │   │   │   ├── SesionEntrenador.java
+│   │   │   │   └── Turno.java
 │   │   │   └── repository/         # Interfaces de acceso a datos
-│   │   │       └── EntrenadorRepository.java
-│   │   └── resources/              # Configuración de la app
-│   │       ├── application.properties  # Config principal de Spring Boot
-│   │       └── static/             # Archivos estáticos (HTML, JS, CSS)
-│   │       └── templates/          # Vistas (Thymeleaf/Freemarker si se usa)
+│   │   │       ├── AlumnoRepository.java
+│   │   │       ├── AgendaRepository.java
+│   │   │       ├── EntrenadorRepository.java
+│   │   │       ├── EjercicioRepository.java
+│   │   │       ├── PlanEntrenamientoRepository.java
+│   │   │       ├── RutinaRepository.java
+│   │   │       ├── RutinaEjercicioRepository.java
+│   │   │       ├── EstadoRepository.java
+│   │   │       ├── SesionEntrenadorRepository.java
+│   │   │       └── TurnoRepository.java
+│   │   └── resources/              
+│   │       ├── application.properties  
+│   │       └── static/             
+│   │       └── templates/          
 │   │
-│   └── test/                       # Tests unitarios e integración
+│   └── test/                       
 │       └── java/com/grindsup/backend/
 │           └── BackendApplicationTests.java
 │
-├── .gitignore                      # Archivos/carpetas ignorados por Git
-├── .gitattributes                  # Normalización de saltos de línea, etc.
-├── mvnw                            # Script Linux/Mac para ejecutar Maven Wrapper
-├── mvnw.cmd                        # Script Windows para ejecutar Maven Wrapper
-├── pom.xml                         # Configuración y dependencias del proyecto
+├── .gitignore                      
+├── .gitattributes                  
+├── mvnw                            
+├── mvnw.cmd                        
+└── pom.xml                         
+
 
 
 
@@ -63,3 +92,4 @@ backend/
       ./mvnw clean package
  -Ejecutar directamente con Maven:
       ./mvnw spring-boot:run
+
