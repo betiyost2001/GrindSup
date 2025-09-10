@@ -1,22 +1,38 @@
 package com.grindsup.backend.model;
 
 import jakarta.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "Entrenadores")
 public class Entrenador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_entrenador;
+    private int id_entrenador;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String apellido;
+
+    @Column(unique = true)
     private String email;
+
     private String telefono;
     private String experiencia;
+
+    @Column(unique = true)
     private String usuario;
+
     private String contraseña;
-    private String estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_estado")
+    private Estado estado;
+
+    @Column(name = "created_at")
+    private Timestamp created_at;
 
     // Getters y Setters
     public Long getId_entrenador() {
@@ -89,5 +105,13 @@ public class Entrenador {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
     }
 }

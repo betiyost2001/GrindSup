@@ -5,7 +5,10 @@ import com.grindsup.backend.repository.EntrenadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/entrenadores")
@@ -14,27 +17,29 @@ public class EntrenadorController {
     @Autowired
     private EntrenadorRepository entrenadorRepository;
 
-    // GET todos los entrenadores
     @GetMapping
     public List<Entrenador> getAll() {
         return entrenadorRepository.findAll();
     }
 
-    // GET un entrenador por id
     @GetMapping("/{id}")
-    public Entrenador getById(@PathVariable Long id) {
+    public Entrenador getById(@PathVariable int id) {
         return entrenadorRepository.findById(id).orElse(null);
     }
 
-    // POST crear nuevo entrenador
     @PostMapping
     public Entrenador create(@RequestBody Entrenador entrenador) {
         return entrenadorRepository.save(entrenador);
     }
 
-    // PUT actualizar entrenador
+    @PostMapping
+    public Entrenador create(@RequestBody Entrenador entrenador) {
+        entrenador.setCreated_at(new Timestamp(System.currentTimeMillis()));
+        return entrenadorRepository.save(entrenador);
+    }
+
     @PutMapping("/{id}")
-    public Entrenador update(@PathVariable Long id, @RequestBody Entrenador entrenador) {
+    public Entrenador update(@PathVariable int id, @RequestBody Entrenador entrenador) {
         Entrenador existing = entrenadorRepository.findById(id).orElse(null);
         if (existing != null) {
             existing.setNombre(entrenador.getNombre());
@@ -44,15 +49,14 @@ public class EntrenadorController {
             existing.setExperiencia(entrenador.getExperiencia());
             existing.setUsuario(entrenador.getUsuario());
             existing.setContraseña(entrenador.getContraseña());
-            existing.setEstado(entrenador.getEstado());
+            existing.setEstado(entrenador.getEstado()); // ya maneja id_estado correctamente
             return entrenadorRepository.save(existing);
         }
         return null;
     }
 
-    // DELETE eliminar entrenador
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable int id) {
         entrenadorRepository.deleteById(id);
         return "Entrenador eliminado con id " + id;
     }
