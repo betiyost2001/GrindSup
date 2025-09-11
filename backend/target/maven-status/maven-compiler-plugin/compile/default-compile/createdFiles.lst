@@ -1,0 +1,4 @@
+com\grindsup\backend\controller\EntrenadorController.class
+com\grindsup\backend\repository\EntrenadorRepository.class
+com\grindsup\backend\model\Entrenador.class
+com\grindsup\backend\GrindSupBackendApplication.class
