@@ -20,7 +20,7 @@ public class EstadoController {
     }
 
     @GetMapping("/{id}")
-    public Estado getById(@PathVariable int id) {
+    public Estado getById(@PathVariable Long id) {
         return estadoRepository.findById(id).orElse(null);
     }
 
@@ -30,18 +30,17 @@ public class EstadoController {
     }
 
     @PutMapping("/{id}")
-    public Estado update(@PathVariable int id, @RequestBody Estado estado) {
-        Estado existing = estadoRepository.findById(id).orElse(null);
-        if (existing != null) {
+    public Estado update(@PathVariable Long id, @RequestBody Estado estado) {
+        return estadoRepository.findById(id).map(existing -> {
             existing.setNombre(estado.getNombre());
             existing.setDescripcion(estado.getDescripcion());
+            existing.setAmbito(estado.getAmbito());
             return estadoRepository.save(existing);
-        }
-        return null;
+        }).orElse(null);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable Long id) {
         estadoRepository.deleteById(id);
         return "Estado eliminado con id " + id;
     }

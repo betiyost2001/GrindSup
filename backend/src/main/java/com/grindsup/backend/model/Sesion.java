@@ -4,23 +4,28 @@ import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "entrenadores")
-public class Entrenador {
+@Table(name = "sesiones")
+public class Sesion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_entrenador;
+    private Long id_sesion;
 
-    // 1:1 con usuarios (id_usuario único)
-    @OneToOne
-    @JoinColumn(name = "id_usuario", nullable = false, unique = true)
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @Column(columnDefinition = "TEXT")
-    private String experiencia;
+    @Column(nullable = false)
+    private OffsetDateTime inicio;
+
+    @Column
+    private OffsetDateTime fin;
 
     @Column(length = 50)
-    private String telefono;
+    private String ip;
+
+    @Column(columnDefinition = "TEXT")
+    private String dispositivo;
 
     @ManyToOne
     @JoinColumn(name = "id_estado")
@@ -36,12 +41,12 @@ public class Entrenador {
     private OffsetDateTime deleted_at;
 
     // Getters y Setters
-    public Long getId_entrenador() {
-        return id_entrenador;
+    public Long getId_sesion() {
+        return id_sesion;
     }
 
-    public void setId_entrenador(Long id_entrenador) {
-        this.id_entrenador = id_entrenador;
+    public void setId_sesion(Long id_sesion) {
+        this.id_sesion = id_sesion;
     }
 
     public Usuario getUsuario() {
@@ -52,20 +57,36 @@ public class Entrenador {
         this.usuario = usuario;
     }
 
-    public String getExperiencia() {
-        return experiencia;
+    public OffsetDateTime getInicio() {
+        return inicio;
     }
 
-    public void setExperiencia(String experiencia) {
-        this.experiencia = experiencia;
+    public void setInicio(OffsetDateTime inicio) {
+        this.inicio = inicio;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public OffsetDateTime getFin() {
+        return fin;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setFin(OffsetDateTime fin) {
+        this.fin = fin;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getDispositivo() {
+        return dispositivo;
+    }
+
+    public void setDispositivo(String dispositivo) {
+        this.dispositivo = dispositivo;
     }
 
     public Estado getEstado() {

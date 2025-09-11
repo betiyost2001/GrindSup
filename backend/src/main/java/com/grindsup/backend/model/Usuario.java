@@ -4,22 +4,35 @@ import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "ejercicios")
-public class Ejercicio {
+@Table(name = "usuarios")
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_ejercicio;
+    private Long id_usuario;
 
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(columnDefinition = "TEXT")
-    private String descripcion;
+    @Column(nullable = false, length = 100)
+    private String apellido;
+
+    @Column(nullable = false, unique = true, length = 150)
+    private String correo;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String contrasena;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rol", nullable = false)
+    private Rol rol;
 
     @ManyToOne
     @JoinColumn(name = "id_estado")
     private Estado estado;
+
+    @Column(name = "foto_perfil", columnDefinition = "TEXT")
+    private String foto_perfil;
 
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime created_at;
@@ -31,12 +44,12 @@ public class Ejercicio {
     private OffsetDateTime deleted_at;
 
     // Getters y Setters
-    public Long getId_ejercicio() {
-        return id_ejercicio;
+    public Long getId_usuario() {
+        return id_usuario;
     }
 
-    public void setId_ejercicio(Long id_ejercicio) {
-        this.id_ejercicio = id_ejercicio;
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNombre() {
@@ -47,12 +60,36 @@ public class Ejercicio {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public Estado getEstado() {
@@ -61,6 +98,14 @@ public class Ejercicio {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public String getFoto_perfil() {
+        return foto_perfil;
+    }
+
+    public void setFoto_perfil(String foto_perfil) {
+        this.foto_perfil = foto_perfil;
     }
 
     public OffsetDateTime getCreated_at() {

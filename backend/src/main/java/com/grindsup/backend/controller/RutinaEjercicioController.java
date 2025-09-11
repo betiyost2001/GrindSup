@@ -2,7 +2,13 @@ package com.grindsup.backend.controller;
 
 import com.grindsup.backend.model.RutinaEjercicio;
 import com.grindsup.backend.model.RutinaEjercicioId;
+import com.grindsup.backend.model.Rutina;
+import com.grindsup.backend.model.Ejercicio;
+import com.grindsup.backend.model.Estado;
 import com.grindsup.backend.repository.RutinaEjercicioRepository;
+import com.grindsup.backend.repository.RutinaRepository;
+import com.grindsup.backend.repository.EjercicioRepository;
+import com.grindsup.backend.repository.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,42 +19,47 @@ import java.util.List;
 public class RutinaEjercicioController {
 
     @Autowired
-    private RutinaEjercicioRepository rutinaEjercicioRepository;
+    private RutinaEjercicioRepository repository;
+
+    @Autowired
+    private RutinaRepository rutinaRepository;
+
+    @Autowired
+    private EjercicioRepository ejercicioRepository;
+
+    @Autowired
+    private EstadoRepository estadoRepository;
 
     @GetMapping
     public List<RutinaEjercicio> getAll() {
-        return rutinaEjercicioRepository.findAll();
+        return repository.findAll();
     }
 
     @GetMapping("/{rutinaId}/{ejercicioId}")
-    public RutinaEjercicio getById(@PathVariable int rutinaId, @PathVariable int ejercicioId) {
-        return rutinaEjercicioRepository.findById(new RutinaEjercicioId(rutinaId, ejercicioId)).orElse(null);
+    public RutinaEjercicio getById(@PathVariable Long rutinaId, @PathVariable Long ejercicioId) {
+        return repository.findById(new RutinaEjercicioId(rutinaId, ejercicioId)).orElse(null);
     }
 
     @PostMapping
-    public RutinaEjercicio create(@RequestBody RutinaEjercicio rutinaEjercicio) {
-        return rutinaEjercicioRepository.save(rutinaEjercicio);
-    }
-
-    @PutMapping("/{rutinaId}/{ejercicioId}")
-    public RutinaEjercicio update(@PathVariable int rutinaId, @PathVariable int ejercicioId,
-            @RequestBody RutinaEjercicio rutinaEjercicio) {
-        RutinaEjercicioId id = new RutinaEjercicioId(rutinaId, ejercicioId);
-        RutinaEjercicio existing = rutinaEjercicioRepository.findById(id).orElse(null);
-        if (existing != null) {
-            existing.setSeries(rutinaEjercicio.getSeries());
-            existing.setRepeticiones(rutinaEjercicio.getRepeticiones());
-            existing.setDuracion(rutinaEjercicio.getDuracion());
-            existing.setRutina(rutinaEjercicio.getRutina());
-            existing.setEjercicio(rutinaEjercicio.getEjercicio());
-            return rutinaEjercicioRepository.save(existing);
+    public RutinaEjercicio create(@RequestBody RutinaEjercicio re) {
+        if (re.getRutina() != null) {
+            Rutina rutina = rutinaRepository.findById(re.getRutina().getId_rutina()).orElse(null);
+            re.setRutina(rutina);
         }
-        return null;
+        if (re.getEjercicio() != null) {
+            Ejercicio ejercicio = ejercicioRepository.findById(re.getEjercicio().getId_ejercicio()).orElse(null);
+            re.setEjercicio(ejercicio);
+        }
+        if (re.getEstado() != null) {
+            Estado estado = estadoRepository.findById(re.getEstado().getId_estado()).orElse(null);
+            re.setEstado(estado);
+        }
+        return repository.save(re);
     }
 
     @DeleteMapping("/{rutinaId}/{ejercicioId}")
-    public String delete(@PathVariable int rutinaId, @PathVariable int ejercicioId) {
-        rutinaEjercicioRepository.deleteById(new RutinaEjercicioId(rutinaId, ejercicioId));
-        return "RutinaEjercicio eliminada con id [" + rutinaId + ", " + ejercicioId + "]";
+    public String delete(@PathVariable Long rutinaId, @PathVariable Long ejercicioId) {
+        repository.deleteById(new RutinaEjercicioId(rutinaId, ejercicioId));
+        return "RutinaEjercicio eliminado";
     }
 }

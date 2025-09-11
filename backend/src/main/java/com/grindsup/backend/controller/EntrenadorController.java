@@ -1,14 +1,15 @@
 package com.grindsup.backend.controller;
 
 import com.grindsup.backend.model.Entrenador;
+import com.grindsup.backend.model.Usuario;
+import com.grindsup.backend.model.Estado;
 import com.grindsup.backend.repository.EntrenadorRepository;
+import com.grindsup.backend.repository.UsuarioRepository;
+import com.grindsup.backend.repository.EstadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/entrenadores")
@@ -17,46 +18,55 @@ public class EntrenadorController {
     @Autowired
     private EntrenadorRepository entrenadorRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private EstadoRepository estadoRepository;
+
     @GetMapping
     public List<Entrenador> getAll() {
         return entrenadorRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Entrenador getById(@PathVariable int id) {
+    public Entrenador getById(@PathVariable Long id) {
         return entrenadorRepository.findById(id).orElse(null);
     }
 
     @PostMapping
     public Entrenador create(@RequestBody Entrenador entrenador) {
-        return entrenadorRepository.save(entrenador);
-    }
-
-    @PostMapping
-    public Entrenador create(@RequestBody Entrenador entrenador) {
-        entrenador.setCreated_at(new Timestamp(System.currentTimeMillis()));
+        if (entrenador.getUsuario() != null) {
+            Usuario usuario = usuarioRepository.findById(entrenador.getUsuario().getId_usuario()).orElse(null);
+            entrenador.setUsuario(usuario);
+        }
+        if (entrenador.getEstado() != null) {
+            Estado estado = estadoRepository.findById(entrenador.getEstado().getId_estado()).orElse(null);
+            entrenador.setEstado(estado);
+        }
         return entrenadorRepository.save(entrenador);
     }
 
     @PutMapping("/{id}")
-    public Entrenador update(@PathVariable int id, @RequestBody Entrenador entrenador) {
-        Entrenador existing = entrenadorRepository.findById(id).orElse(null);
-        if (existing != null) {
-            existing.setNombre(entrenador.getNombre());
-            existing.setApellido(entrenador.getApellido());
-            existing.setEmail(entrenador.getEmail());
-            existing.setTelefono(entrenador.getTelefono());
+    public Entrenador update(@PathVariable Long id, @RequestBody Entrenador entrenador) {
+        return entrenadorRepository.findById(id).map(existing -> {
             existing.setExperiencia(entrenador.getExperiencia());
-            existing.setUsuario(entrenador.getUsuario());
-            existing.setContraseña(entrenador.getContraseña());
-            existing.setEstado(entrenador.getEstado()); // ya maneja id_estado correctamente
+            existing.setTelefono(entrenador.getTelefono());
+
+            if (entrenador.getUsuario() != null) {
+                Usuario usuario = usuarioRepository.findById(entrenador.getUsuario().getId_usuario()).orElse(null);
+                existing.setUsuario(usuario);
+            }
+            if (entrenador.getEstado() != null) {
+                Estado estado = estadoRepository.findById(entrenador.getEstado().getId_estado()).orElse(null);
+                existing.setEstado(estado);
+            }
             return entrenadorRepository.save(existing);
-        }
-        return null;
+        }).orElse(null);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable Long id) {
         entrenadorRepository.deleteById(id);
         return "Entrenador eliminado con id " + id;
     }

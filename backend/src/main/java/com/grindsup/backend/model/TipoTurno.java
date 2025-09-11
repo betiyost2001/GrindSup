@@ -4,21 +4,18 @@ import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "estados")
-public class Estado {
+@Table(name = "tipos_turno")
+public class TipoTurno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_estado;
+    private Long id_tipoturno;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     private String nombre;
 
-    @Column(length = 255)
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
-
-    @Column(length = 50)
-    private String ambito;
 
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime created_at;
@@ -30,12 +27,12 @@ public class Estado {
     private OffsetDateTime deleted_at;
 
     // Getters y Setters
-    public Long getId_estado() {
-        return id_estado;
+    public Long getId_tipoturno() {
+        return id_tipoturno;
     }
 
-    public void setId_estado(Long id_estado) {
-        this.id_estado = id_estado;
+    public void setId_tipoturno(Long id_tipoturno) {
+        this.id_tipoturno = id_tipoturno;
     }
 
     public String getNombre() {
@@ -52,14 +49,6 @@ public class Estado {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getAmbito() {
-        return ambito;
-    }
-
-    public void setAmbito(String ambito) {
-        this.ambito = ambito;
     }
 
     public OffsetDateTime getCreated_at() {

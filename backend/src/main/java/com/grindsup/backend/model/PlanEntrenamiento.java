@@ -1,32 +1,49 @@
 package com.grindsup.backend.model;
 
 import jakarta.persistence.*;
-import java.sql.Date;
+import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "PlanesEntrenamiento")
+@Table(name = "planes_entrenamiento")
 public class PlanEntrenamiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_plan;
+    private Long id_plan;
 
     @ManyToOne
     @JoinColumn(name = "id_alumno", nullable = false)
     private Alumno alumno;
 
+    @Column(columnDefinition = "TEXT")
     private String objetivo;
-    private String tipo_entrenamiento;
-    private Integer sesiones_por_semana;
-    private Date fecha_inicio;
-    private Date fecha_fin;
+
+    @Column(name = "fecha_inicio")
+    private LocalDate fecha_inicio;
+
+    @Column(name = "fecha_fin")
+    private LocalDate fecha_fin;
+
+    @ManyToOne
+    @JoinColumn(name = "id_estado")
+    private Estado estado;
+
+    @Column(name = "created_at", nullable = false)
+    private OffsetDateTime created_at;
+
+    @Column(name = "updated_at", nullable = false)
+    private OffsetDateTime updated_at;
+
+    @Column(name = "deleted_at")
+    private OffsetDateTime deleted_at;
 
     // Getters y Setters
-    public int getId_plan() {
+    public Long getId_plan() {
         return id_plan;
     }
 
-    public void setId_plan(int id_plan) {
+    public void setId_plan(Long id_plan) {
         this.id_plan = id_plan;
     }
 
@@ -46,35 +63,51 @@ public class PlanEntrenamiento {
         this.objetivo = objetivo;
     }
 
-    public String getTipo_entrenamiento() {
-        return tipo_entrenamiento;
-    }
-
-    public void setTipo_entrenamiento(String tipo_entrenamiento) {
-        this.tipo_entrenamiento = tipo_entrenamiento;
-    }
-
-    public Integer getSesiones_por_semana() {
-        return sesiones_por_semana;
-    }
-
-    public void setSesiones_por_semana(Integer sesiones_por_semana) {
-        this.sesiones_por_semana = sesiones_por_semana;
-    }
-
-    public Date getFecha_inicio() {
+    public LocalDate getFecha_inicio() {
         return fecha_inicio;
     }
 
-    public void setFecha_inicio(Date fecha_inicio) {
+    public void setFecha_inicio(LocalDate fecha_inicio) {
         this.fecha_inicio = fecha_inicio;
     }
 
-    public Date getFecha_fin() {
+    public LocalDate getFecha_fin() {
         return fecha_fin;
     }
 
-    public void setFecha_fin(Date fecha_fin) {
+    public void setFecha_fin(LocalDate fecha_fin) {
         this.fecha_fin = fecha_fin;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public OffsetDateTime getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(OffsetDateTime created_at) {
+        this.created_at = created_at;
+    }
+
+    public OffsetDateTime getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(OffsetDateTime updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public OffsetDateTime getDeleted_at() {
+        return deleted_at;
+    }
+
+    public void setDeleted_at(OffsetDateTime deleted_at) {
+        this.deleted_at = deleted_at;
     }
 }
