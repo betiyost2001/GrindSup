@@ -31,7 +31,7 @@ Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desd
 * Product Owner: Azul Oyola.
 * Scrum Master: Azul Oyola.
 * Programación backend: Martín Gamboa, Agustina Silva, Azul Oyola.
-* Programación frontend: Betina Yost, Fanny Álvarez, Dana Montesinos.
+* Programación frontend: Betina Yost, Dana Montesinos.
 
 ---
 
