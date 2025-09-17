@@ -27,9 +27,9 @@ Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desd
 * Actualizar y completar **Documentación**.
 * Implementar HU-42 (Iniciar sesión) y HU-43 (Cerrar sesión) con usuarios precargados.
 * Desarrollar funcionalidades de Gestión de Alumnos:
-      * HU-1 Registrar alumno
-      * HU-4 Visualizar lista de alumnos
-      * HU-5 Editar alumno
+  - HU-1 Registrar alumno
+  - HU-4 Visualizar lista de alumnos
+  - HU-5 Editar alumno
 * Implementar el backend en Spring Boot con conexión a MySQL y peticiones CRUD.
 
 **Roles:**
