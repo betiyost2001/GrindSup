@@ -1,45 +1,45 @@
 ## 🗂️ Estructura del proyecto
 frontend/
-│
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html
 ├── package.json
-├── README.md
+├── package-lock.json
 ├── vite.config.js
 ├── public/
-│   └── vite.png
+│   ├── vite.png
+│   └── react.svg
 ├── src/
 │   ├── App.css
 │   ├── App.jsx
 │   ├── index.css
 │   ├── main.jsx
 │   ├── assets/
-│   │   ├── react.png
-│   │   └── react.svg
+│   │   └── react.png
 │   ├── components/
 │   │   ├── AccionesFormulario.jsx
 │   │   ├── DialogoConfirmacion.jsx
-│   │   └── TablaDatos.jsx
+│   │   ├── TablaDatos.jsx
+│   │   ├── Footer.jsx
+│   │   └── Header.jsx
 │   ├── context/
 │   │   ├── AuthContext.jsx
-│   │   ├── context.md
-│   │   └── SnackbarContext.jsx
+│   │   ├── SnackbarContext.jsx
+│   │   └── context.md
 │   ├── layout/
-│   │   ├── layout.md
 │   │   ├── MainLayout.jsx
 │   │   ├── NavBar.jsx
-│   │   └── SideMenu.jsx
+│   │   ├── SideMenu.jsx
+│   │   └── layout.md
 │   ├── pages/
 │   │   ├── pages.md
 │   │   ├── Alumno/
-│   │   │   ├── DetalleRegistrarAlumnoForm.jsx
+│   │   │   └── DetalleRegistrarAlumnoForm.jsx
 │   │   ├── Ejercicios/
 │   │   │   ├── FormularioEjercicios.jsx
 │   │   │   └── ListaEjercicios.jsx
 │   │   ├── Entrenadores/
-│   │   │   ├── FormularioEntrenador.jsx
-│   │   │   └── ListaEntrenadores.jsx
+│   │   │   └── FormularioEntrenadores.jsx
 │   │   ├── Notificaciones/
 │   │   │   └── CentroNotificaciones.jsx
 │   │   ├── Planes/
@@ -54,8 +54,7 @@ frontend/
 │   │   ├── Tablero/
 │   │   │   └── PaginaTablero.jsx
 │   │   ├── TiposEntrenamiento/
-│   │   │   ├── FormularioTipoEntrenamiento.jsx
-│   │   │   └── ListaTiposEntrenamiento.jsx
+│   │   │   └── FormularioTipoEntrenamiento.jsx
 │   │   ├── Turnos/
 │   │   │   ├── CalendarioTurnos.jsx
 │   │   │   └── FormularioTurno.jsx
@@ -66,27 +65,23 @@ frontend/
 │   ├── routes/
 │   │   └── router.jsx
 │   ├── services/
-│   │   ├── clienteApi.js
-│   │   ├── clientes.servicio.js
+│   │   ├── cliente.servicio.js
 │   │   ├── ejercicios.servicio.js
-│   │   ├── entrenadores.servicio.js
 │   │   ├── planes.servicio.js
 │   │   ├── reportes.servicio.js
 │   │   ├── rutinas.servicio.js
-│   │   ├── service.md
 │   │   ├── tipoEntrenamiento.servicio.js
 │   │   ├── turnos.servicio.js
 │   │   └── usuarios.servicio.js
 │   ├── styles/
-│   │   └── globas.css
+│   │   └── styles.md
 │   └── theme/
 │       ├── theme.js
-│       ├── muiTheme.js
-│       └── theme.md
-└── (otros archivos del proyecto frontend)
+│       ├── theme.md
+│       └── muiTheme.js
 
 
-## 🛠️ Dependencias principales HU1
+## 🛠️ Dependencias principales 
 
 React 18 – librería principal
 Vite – bundler y dev server
