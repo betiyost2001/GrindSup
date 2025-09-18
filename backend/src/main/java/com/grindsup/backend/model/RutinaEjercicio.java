@@ -9,14 +9,20 @@ import java.time.OffsetDateTime;
 public class RutinaEjercicio {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "id_rutina", nullable = false)
-    private Rutina rutina;
+    @Column(name = "id_ejercicio")
+    private Long id_ejercicio; // Debe coincidir con el nombre en RutinaEjercicioId
 
     @Id
+    @Column(name = "id_rutina")
+    private Long id_rutina; // Debe coincidir con el nombre en RutinaEjercicioId
+
     @ManyToOne
-    @JoinColumn(name = "id_ejercicio", nullable = false)
+    @JoinColumn(name = "id_ejercicio", insertable = false, updatable = false)
     private Ejercicio ejercicio;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rutina", insertable = false, updatable = false)
+    private Rutina rutina;
 
     private Integer repeticiones;
     private Integer series;
@@ -36,20 +42,20 @@ public class RutinaEjercicio {
     private OffsetDateTime deleted_at;
 
     // Getters y Setters
-    public Rutina getRutina() {
-        return rutina;
-    }
-
-    public void setRutina(Rutina rutina) {
-        this.rutina = rutina;
-    }
-
     public Ejercicio getEjercicio() {
         return ejercicio;
     }
 
     public void setEjercicio(Ejercicio ejercicio) {
         this.ejercicio = ejercicio;
+    }
+
+    public Rutina getRutina() {
+        return rutina;
+    }
+
+    public void setRutina(Rutina rutina) {
+        this.rutina = rutina;
     }
 
     public Integer getRepeticiones() {
