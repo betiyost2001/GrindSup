@@ -1,20 +1,4 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-
 ## 🗂️ Estructura del proyecto
-```.
-
 frontend/
 │
 ├── .gitignore
@@ -48,10 +32,8 @@ frontend/
 │   │   └── SideMenu.jsx
 │   ├── pages/
 │   │   ├── pages.md
-│   │   ├── Clientes/
-│   │   │   ├── DetalleCliente.jsx
-│   │   │   ├── FormularioCliente.jsx
-│   │   │   └── ListaClientes.jsx
+│   │   ├── Alumno/
+│   │   │   ├── DetalleRegistrarAlumnoForm.jsx
 │   │   ├── Ejercicios/
 │   │   │   ├── FormularioEjercicios.jsx
 │   │   │   └── ListaEjercicios.jsx
@@ -98,7 +80,45 @@ frontend/
 │   ├── styles/
 │   │   └── globas.css
 │   └── theme/
-│       ├── chakraTheme.js
+│       ├── theme.js
 │       ├── muiTheme.js
 │       └── theme.md
 └── (otros archivos del proyecto frontend)
+
+
+## 🛠️ Dependencias principales HU1
+
+React 18 – librería principal
+Vite – bundler y dev server
+Chakra UI v2 – componentes de UI
+@chakra-ui/icons – íconos de Chakra
+Emotion – motor de estilos requerido por Chakra
+Framer Motion – animaciones de menús, modales, etc.
+
+package.json:
+{
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.21",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "framer-motion": "^10.16.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.0",
+    "vite": "^5.2.0"
+  }
+}
+
+# frontend disponible en: http://localhost:5173
+
+##📑 Notas
+
+Este proyecto está configurado para usar Chakra UI v2.
+
+Los formularios están listos para integrarse al backend vía API REST.
+
+En desarrollo, el front apunta por defecto a http://localhost:8080/api.
+Se puede cambiar creando un archivo .env: VITE_API_BASE_URL=http://localhost:8080/api

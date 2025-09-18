@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.png'
-import './App.css'
-function App() {
+import { Box, Container } from "@chakra-ui/react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import RegistrarAlumnoForm from "./pages/Alumno/RegistrarAlumnoForm";
 
+export default function App() {
   return (
-    <>
-      <div>
-        <img src={reactLogo} className="logo react" alt="React logo" />
-      </div>
-      <h1>GrindSup en progreso...</h1>
-    </>
-  )
+    <Box minH="100vh" display="flex" flexDirection="column">
+      <Header />
+      <Box as="main" flex="1" py={{ base: 6, md: 10 }}>
+        <Container maxW="container.md">
+          <RegistrarAlumnoForm />
+        </Container>
+      </Box>
+      <Footer />
+    </Box>
+  );
 }
-
-export default App
