@@ -52,6 +52,8 @@ Este documento detalla los sprints de desarrollo del proyecto **GrindSup**, desd
 
 ## Dependencias
 ### Backend
-- Compilar y empaquetar: `./mvnw clean package`
-- Ejecutar directamente con Maven: `./mvnw spring-boot:run`
+* **Compilar y empaquetar:** `mvn clean package`
+* **Ejecutar en desarrollo:** `mvn spring-boot:run`
+* **Ejecutar jar generado:** `java -jar target/backend-0.0.1-SNAPSHOT.jar`
+
 ### Frontend

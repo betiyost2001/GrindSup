@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import RegistrarAlumnoForm from "./pages/Alumno/RegistrarAlumnoForm";
 
 export default function App() {
+  
   return (
     <Box minH="100vh" display="flex" flexDirection="column">
       <Header />

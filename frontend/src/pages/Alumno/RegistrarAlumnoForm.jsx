@@ -27,7 +27,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 
 export default function RegistrarAlumnoForm({
   apiBaseUrl = import.meta?.env?.VITE_API_BASE_URL || "http://localhost:8080/api",
-  usarMock = true,
+  usarMock = false,
 }) {
   const toast = useToast();
   const [submitting, setSubmitting] = useState(false);
@@ -51,9 +51,7 @@ export default function RegistrarAlumnoForm({
   useEffect(() => {
     const fetchCodes = async () => {
       try {
-        const res = await fetch(
-          "https://restcountries.com/v3.1/all?fields=cca2,idd,name"
-        );
+        const res = await fetch("https://restcountries.com/v3.1/all?fields=cca2,idd,name");
         const data = await res.json();
 
         const parsed = data
@@ -90,8 +88,7 @@ export default function RegistrarAlumnoForm({
     if (!form.apellido?.trim()) e.apellido = "El apellido es obligatorio";
 
     if (!form.documento?.trim()) e.documento = "El documento es obligatorio";
-    else if (!/^[0-9]+$/.test(form.documento))
-      e.documento = "El DNI debe contener solo números";
+    else if (!/^[0-9]+$/.test(form.documento)) e.documento = "El DNI debe contener solo números";
 
     if (!form.fechaNac?.trim()) e.fechaNac = "La fecha de nacimiento es obligatoria";
     else {
@@ -115,11 +112,15 @@ export default function RegistrarAlumnoForm({
     nombre: form.nombre.trim(),
     apellido: form.apellido.trim(),
     documento: form.documento.trim(),
-    fechaNac: form.fechaNac,
+    fechaNacimiento: form.fechaNac,
     peso: form.peso ? Number(form.peso) : null,
     altura: form.altura ? Number(form.altura) : null,
     lesiones: form.lesiones?.trim() || null,
-    contacto: form.codigoArea + form.contactoNumero,
+    telefono: form.codigoArea + form.contactoNumero,
+
+    // 👇 Clave para que no falle en el backend:
+    estado: { id_estado: 1 }, // Activo
+    entrenador: null,          // Sin entrenador asignado
   });
 
   const submitMock = () => new Promise((r) => setTimeout(() => r({ ok: true }), 700));
@@ -142,7 +143,15 @@ export default function RegistrarAlumnoForm({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        if (!res.ok) throw new Error("Error al registrar");
+        if (!res.ok) {
+          // intentar leer mensaje del back
+          let msg = "Error al registrar";
+          try {
+            const j = await res.json();
+            if (j?.message) msg = j.message;
+          } catch {}
+          throw new Error(msg);
+        }
         await res.json();
       }
       toast({ status: "success", title: "Alumno registrado", position: "top" });
