@@ -38,7 +38,16 @@ const AlumnoList = () => {
     axios
       .get("http://localhost:8080/api/alumnos")
       .then((res) => setAlumnos(res.data))
-      .catch((err) => console.error("Error al cargar alumnos:", err))
+      .catch((err) => {
+        console.error("Error al cargar alumnos:", err);
+        toast({
+          title: "Error al cargar alumnos",
+          description: "Verificá el backend",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      })
       .finally(() => setLoading(false));
   };
 
@@ -47,7 +56,15 @@ const AlumnoList = () => {
     axios
       .get("http://localhost:8080/api/estados")
       .then((res) => setEstados(res.data))
-      .catch((err) => console.error("Error al cargar estados:", err));
+      .catch((err) => {
+        console.error("Error al cargar estados:", err);
+        toast({
+          title: "Error al cargar estados",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
   };
 
   useEffect(() => {
@@ -57,10 +74,12 @@ const AlumnoList = () => {
 
   // 🔄 Cambiar estado de un alumno
   const handleEstadoChange = (idAlumno, idEstado) => {
+    const alumno = alumnos.find((a) => a.id_alumno === idAlumno);
+
     axios
       .put(`http://localhost:8080/api/alumnos/${idAlumno}`, {
-        ...alumnos.find((a) => a.id_alumno === idAlumno),
-        estado: { id_estado: idEstado },
+        ...alumno,
+        estado: { id_estado: Number(idEstado) },
       })
       .then(() => {
         toast({
@@ -69,7 +88,7 @@ const AlumnoList = () => {
           duration: 2000,
           isClosable: true,
         });
-        fetchAlumnos(); // refrescar lista
+        fetchAlumnos();
       })
       .catch((err) => {
         console.error("Error al actualizar estado:", err);
@@ -99,6 +118,7 @@ const AlumnoList = () => {
         console.error("Error al eliminar alumno:", err);
         toast({
           title: "Error al eliminar",
+          description: "Verificá si el backend está activo",
           status: "error",
           duration: 2000,
           isClosable: true,
@@ -112,7 +132,7 @@ const AlumnoList = () => {
     return (
       alumno.nombre?.toLowerCase().includes(query) ||
       alumno.apellido?.toLowerCase().includes(query) ||
-      alumno.documento?.toLowerCase().includes(query)
+      String(alumno.documento)?.toLowerCase().includes(query)
     );
   });
 
@@ -192,6 +212,7 @@ const AlumnoList = () => {
                         size="sm"
                         colorScheme="blue"
                         leftIcon={<EditIcon />}
+                        onClick={() => navigate(`/alumno/editar/${alumno.id_alumno}`)}
                       >
                         Editar
                       </Button>

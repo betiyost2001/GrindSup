@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import RegistrarAlumnoForm from "./pages/Alumno/RegistrarAlumnoForm";
 import AlumnoList from "./components/AlumnoList";
+import EditarAlumnoForm from "./pages/Alumno/EditarAlumnoForm";
 
 export default function App() {
   return (
@@ -14,7 +15,9 @@ export default function App() {
           <Container maxW="container.xl">
             <Routes>
               <Route path="/" element={<AlumnoList />} />
+              <Route path="/alumnos" element={<AlumnoList />} />
               <Route path="/alumno/registrar" element={<RegistrarAlumnoForm />} />
+              <Route path="/alumno/editar/:id" element={<EditarAlumnoForm />} />
             </Routes>
           </Container>
         </Box>
