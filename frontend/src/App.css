@@ -1,26 +1,16 @@
+/* Limpiamos estilos de la plantilla que deformaban el layout */
+
+/* NO limitar el #root ni centrar todo el contenido */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: initial;
 }
 
-.logo {
-  height: 26em;
-  will-change: filter;
-  transition: filter 300ms;
+/* Conservamos sólo el helper del header sticky si querés duplicarlo aquí también */
+.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1100 !important;
 }
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61fba6aa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
