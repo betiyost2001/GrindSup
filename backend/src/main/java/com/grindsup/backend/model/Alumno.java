@@ -1,56 +1,62 @@
 package com.grindsup.backend.model;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "alumnos")
+@Table(name = "alumnos") // 🚩 Aclaración: usamos "alumnos" (plural) porque así está en la DB
 public class Alumno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_alumno;
 
+    // 🚩 CAMBIO: Relación con Entrenador, pero puede ser NULL (nullable = true)
+    // porque todavía no lo asignamos al crear/editar desde el Controller
     @ManyToOne
     @JoinColumn(name = "id_entrenador", nullable = true)
     private Entrenador entrenador;
 
     @Column(nullable = false, length = 100)
-    private String nombre;
+    private String nombre; // requerido
 
     @Column(length = 100)
-    private String apellido;
+    private String apellido; // opcional
 
-    // 📌 Documento (DNI)
+    // 🚩 CAMBIO: Documento agregado como campo obligatorio y UNIQUE
+    // evita duplicados y es usado en el backend para validar
     @Column(nullable = false, length = 20, unique = true)
     private String documento;
 
-    // 📌 Teléfono (viene del front como "contacto")
+    // 🚩 CAMBIO: Teléfono opcional (el front lo manda como "contacto")
     @Column(length = 50)
     private String telefono;
 
-    // 📌 Fecha de nacimiento
+    // 🚩 CAMBIO: Agregamos fecha de nacimiento
+    // Se guarda como DATE y se formatea en JSON como yyyy-MM-dd
     @Column(name = "fecha_nacimiento")
-    @JsonFormat(pattern = "yyyy-MM-dd")  // 👈 agregado
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaNacimiento;
 
-    // 📌 Peso en kg
+    // 🚩 CAMBIO: Nuevos campos físicos
     @Column
-    private Double peso;
+    private Double peso;   // opcional
 
-    // 📌 Altura en cm
     @Column
-    private Double altura;
+    private Double altura; // opcional
 
-    // 📌 Historial de lesiones
+    // 🚩 CAMBIO: Historial de lesiones, tipo TEXT para permitir texto largo
     @Column(columnDefinition = "TEXT")
     private String lesiones;
 
+    // Relación con la tabla estados (id_estado)
     @ManyToOne
     @JoinColumn(name = "id_estado")
     private Estado estado;
 
+    // Auditoría: timestamps para altas, modificaciones y bajas lógicas
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime created_at;
 
@@ -60,7 +66,7 @@ public class Alumno {
     @Column(name = "deleted_at")
     private OffsetDateTime deleted_at;
 
-    // Getters y Setters
+    // Getters y Setters (generados por Lombok en otros proyectos, acá manuales)
     public Long getId_alumno() {
         return id_alumno;
     }
@@ -173,4 +179,3 @@ public class Alumno {
         this.deleted_at = deleted_at;
     }
 }
-

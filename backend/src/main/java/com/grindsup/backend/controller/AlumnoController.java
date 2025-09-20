@@ -36,14 +36,17 @@ public class AlumnoController {
 
     @PostMapping
     public Alumno create(@RequestBody Alumno alumno) {
-        // Estado por defecto = 1 (si existe); si no existe, queda null y permite guardar
+        // Estado por defecto = 1 (ACTIVO) si existe; si no, queda null y permite guardar
         Estado estadoActivo = estadoRepository.findById(1L).orElse(null);
         alumno.setEstado(estadoActivo);
 
-        // Entrenador aún no implementado → lo dejamos en null
+        // 🚩 CAMBIO: Entrenador ahora puede ser NULL → lo dejamos sin asignar al crear
         alumno.setEntrenador(null);
 
-        // Timestamps obligatorios
+        // 🚩 CAMBIO: Agregamos soporte a nuevos campos (peso, altura, lesiones, etc.)
+        // Estos se guardan en la tabla alumnos, pero son opcionales (permiten null)
+
+        // Timestamps obligatorios → control de auditoría
         OffsetDateTime ahora = OffsetDateTime.now();
         alumno.setCreated_at(ahora);
         alumno.setUpdated_at(ahora);
@@ -57,7 +60,7 @@ public class AlumnoController {
         try {
             return alumnoRepository.save(alumno);
         } catch (DataIntegrityViolationException ex) {
-            // p.ej. documento duplicado (UNIQUE)
+            // 📌 Documento sigue siendo UNIQUE → evita duplicados
             throw new ResponseStatusException(
                 HttpStatus.CONFLICT,
                 "No se pudo crear el alumno (verificá si el documento ya existe).",
@@ -74,17 +77,19 @@ public class AlumnoController {
             existing.setApellido(alumno.getApellido());
             existing.setDocumento(alumno.getDocumento());
             existing.setTelefono(alumno.getTelefono());
+
+            // 🚩 CAMBIO: Ahora el modelo soporta más atributos opcionales
             existing.setFechaNacimiento(alumno.getFechaNacimiento());
             existing.setPeso(alumno.getPeso());
             existing.setAltura(alumno.getAltura());
             existing.setLesiones(alumno.getLesiones());
 
-            // Entrenador: seguimos dejándolo en null hasta implementar esa parte
+            // 🚩 CAMBIO: Entrenador sigue siendo NULL hasta implementar esa parte
             existing.setEntrenador(null);
 
             // Estado: si viene en el request con id válido, lo actualizo; si no, dejo el actual
             if (alumno.getEstado() != null) {
-                Long estadoId = alumno.getEstado().getId_estado(); // ajustado a tu entidad Estado
+                Long estadoId = alumno.getEstado().getId_estado();
                 if (estadoId != null) {
                     Estado nuevoEstado = estadoRepository.findById(estadoId).orElse(existing.getEstado());
                     existing.setEstado(nuevoEstado);
